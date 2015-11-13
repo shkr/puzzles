@@ -20,16 +20,38 @@ object Yacht {
   import Daughter._
   import Father._
 
-//  val whiteAssertions = {
-//    case Family(_, d, y) => d!=y
-//    case Family(Hood, _, Gabrielle) => true
-//    case Family(Moore, _, Lorna) => true
-//    case Family(Hall, _, Rosalind) => true
-//    case Family(Downing, _, Melissa) => true
-//    case Family(Hood, Melissa, _) => true
-//    case Family(Moore, MaryAnne, _) => true
-//  }
+  val assertion1: PartialFunction[Family, Boolean] = {
+    case someFamily: Family => someFamily.daughter!=someFamily.yacht
+  }
 
+  val assertion2: PartialFunction[Family, Boolean] = {
+    case Family(Hood, daughter, yacht) => yacht==Gabrielle
+  }
+
+  val assertion3: PartialFunction[Family, Boolean] = {
+    case Family(Moore, daughter, yacht) => yacht==Lorna
+  }
+
+  val assertion4: PartialFunction[Family, Boolean] = {
+    case Family(Hall, daughter, yacht) => yacht==Rosalind
+  }
+
+  val assertion5: PartialFunction[Family, Boolean] = {
+    case Family(Downing, daughter, yacht) => yacht==Melissa
+  }
+
+  val assertion6: PartialFunction[Family, Boolean] = {
+    case Family(Hood, daughter, yacht) => daughter==Melissa
+  }
+
+  val assertion7: PartialFunction[Family, Boolean] = {
+    case Family(Moore, daughter, yacht) => daughter==MaryAnne
+  }
+
+  //Used as List[Family].withFilter(assertion*.orElse(defaultAssertion))
+  val defaultAssertion: PartialFunction[Family, Boolean] = {
+    case _ => true
+  }
   val valid = perms.
     filter(p => p.daughter != MaryAnne || p.father == Moore).
     filter(p => p.yacht != Gabrielle || p.father == Hood).
@@ -51,6 +73,7 @@ object Yacht {
     filter(isValid)
 
   def main(args: Array[String]): Unit={
+    
     println(validCombos.next().filter(_.daughter == Lorna).head.father)
   }
 }
