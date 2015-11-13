@@ -1,5 +1,5 @@
 
-[org.shkr.puzzles.combinatorial.Yacht]
+[org.shkr.puzzles.combinatorial.Yacht](https://github.com/shkr/puzzles/blob/master/src/main/scala/org/shkr/puzzles/combinatorial/Yacht.scala)
 PUZZLE 1: YACHTS
 ---
 It is exercise 4.43 from SICP.
